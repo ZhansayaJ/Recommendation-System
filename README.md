@@ -32,11 +32,11 @@ To further enhance the recommendation system, clustering algorithms are employed
 Accessing the provided dataset, the project conducts feature engineering to enrich the dataset with meaningful features for each user. This involves:
 
 Grouping data by user_id to create new features, including:
-  a) **Favorite Genre:** Calculated as the genre with the highest total duration of clicks by the user.
-  b) **Total Clicks Count:** The total number of clicks made by the user.
-  c) **Unique Movies Watched:** The number of unique movies watched by the user.
-  d) **Favorite Movie:** The movie with the highest total duration of clicks by the user.
-  e) **Most Active Month:** The month in which the user is most active, based on the mode of click timestamps.
+  -  **Favorite Genre:** Calculated as the genre with the highest total duration of clicks by the user.
+  -  **Total Clicks Count:** The total number of clicks made by the user.
+  -  **Unique Movies Watched:** The number of unique movies watched by the user.
+  -  **Favorite Movie:** The movie with the highest total duration of clicks by the user.
+  -  **Most Active Month:** The month in which the user is most active, based on the mode of click timestamps.
 
 ## Conclusion
 
