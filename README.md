@@ -1,43 +1,79 @@
-# ADM-HW4
+# Movie Recommendation System using MinHash and LSH
 
-### This is the repository dedicated to Homework 4 for ADM course. 
-#### Group 31 - Zhansaya Jumasheva.
+This project explores user behavior in a UK-based video-on-demand platform and builds a scalable movie recommendation system using MinHash and Locality Sensitive Hashing (LSH).
 
-- [__`main.ipynb`__]( ): - contains answers to Questions 1 and 2
+---
 
-# Project Description
+## Dataset
 
-This Python project focuses on building a recommendation system using Locality-Sensitive Hashing (LSH) algorithm based on user clickstream data from the provided dataset "vodclickstream_uk_movies_03.csv".
+We used the `vodclickstream_uk_movies_03` dataset, which contains anonymized user clickstream data, including timestamps, user IDs, and movie titles.
 
-## Recommendation System using LSH Algorithm
+---
 
-### 1.2 Minhash Signatures
+## Objectives
 
-Utilizing movie genre and user_ids, the project implements min-hash signatures to group users with similar interests in a genre into the same bucket. 
+- Understand user preferences through exploratory data analysis (EDA)
+- Build a recommendation system based on user similarity using MinHash and LSH
+- Evaluate recommendation quality using Jaccard similarity with a train/test split approach
+- Engineer meaningful user-level features
 
-### 1.3 Locality-Sensitive Hashing (LSH)
+---
 
-Once the buckets are prepared, the project proceeds with executing queries. Given specific user_ids, the system recommends at most five movies for the user to watch, based on movies clicked by similar users. The recommendation procedure involves:
+## Exploratory Data Analysis (EDA)
 
-- Identifying the two most similar users to the target user.
-- Recommending movies based on the total number of clicks by these similar users, prioritizing common movies.
-- Proposing the most clicked movies by the most similar user first, followed by the other user.
+Key visualizations include:
 
-### Clustering Algorithms
+- **Top 10 Most Clicked Movies**: A bar chart showing the most popular content across all users.
+- **Click Distribution**: Histogram of total clicks per movie to understand long-tail behavior.
 
-To further enhance the recommendation system, clustering algorithms are employed to group Netflix users with similar preferences.
+---
 
-#### 2.1 Getting Your Data + Feature Engineering
+## Feature Engineering
 
-Accessing the provided dataset, the project conducts feature engineering to enrich the dataset with meaningful features for each user. This involves:
+For each user, we extracted the following features:
 
-Grouping data by user_id to create new features, including:
-  -  **Favorite Genre:** Calculated as the genre with the highest total duration of clicks by the user.
-  -  **Total Clicks Count:** The total number of clicks made by the user.
-  -  **Unique Movies Watched:** The number of unique movies watched by the user.
-  -  **Favorite Movie:** The movie with the highest total duration of clicks by the user.
-  -  **Most Active Month:** The month in which the user is most active, based on the mode of click timestamps.
+| Feature                             | Description                                        |
+|-------------------------------------|----------------------------------------------------|
+| `user_id`                           | Anonymized unique identifier                      |
+| `favorite_genre`                    | Genre most frequently clicked                     |
+| `total_clicks_count`                | Total number of clicks made by the user           |
+| `number_of_unique_movies_watched`  | How many different movies the user interacted with|
+| `favourite_movie`                   | The movie with the most clicks for the user       |
+| `most_active_month`                | The month with the highest user activity          |
 
-## Conclusion
+---
 
-This project aims to develop a recommendation system utilizing the LSH algorithm and feature engineering techniques to provide personalized movie recommendations to users based on their interests and behaviors. By implementing minhash signatures and LSH, along with extensive feature engineering, the system enhances user experience by offering relevant and tailored movie suggestions.
+## Recommendation System
+
+Use MinHash to represent each user’s movie preferences as a compact signature, and LSH to efficiently find users with similar tastes.
+
+### Steps
+
+1. For each user, build a MinHash signature of their top-clicked movies.
+2. Use LSH to find similar users.
+3. Recommend movies watched by similar users that the target user hasn’t seen yet.
+
+---
+
+## Evaluation
+
+Evaluate recommendations using Jaccard similarity between the system's recommendations and a held-out test set of the user's actual preferences (train/test split). Metrics include:
+
+- Average Jaccard similarity score over a sample of users
+- Proportion of users with successful recommendations
+
+---
+
+## Results
+
+- The system successfully recommended relevant movies for a large portion of users.
+- Jaccard similarity scores showed measurable overlap between recommended and actual held-out movies.
+- Lowering the LSH threshold increased coverage but sometimes reduced precision.
+
+---
+
+## Technologies Used
+
+- Python (Pandas, NumPy, Matplotlib/Seaborn)
+- [Datasketch](https://ekzhu.github.io/datasketch/) for MinHash and LSH
+- Jupyter Notebooks for development and visualization
