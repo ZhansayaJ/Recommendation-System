@@ -64,14 +64,6 @@ Evaluate recommendations using Jaccard similarity between the system's recommend
 
 ---
 
-## Results
-
-- The system successfully recommended relevant movies for a large portion of users.
-- Jaccard similarity scores showed measurable overlap between recommended and actual held-out movies.
-- Lowering the LSH threshold increased coverage but sometimes reduced precision.
-
----
-
 ## Technologies Used
 
 - Python (Pandas, NumPy, Matplotlib/Seaborn)
